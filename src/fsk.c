@@ -32,6 +32,7 @@
 #include <stdlib.h>
 #include <inttypes.h>
 #include <string.h>
+#include <stdio.h>
 #if defined(HAVE_TGMATH_H)
 #include <tgmath.h>
 #endif
@@ -365,7 +366,15 @@ SPAN_DECLARE_NONSTD(int) fsk_rx(fsk_rx_state_t *s, const int16_t *amp, int len)
     int32_t power;
     complexi_t ph;
 
+    const char * tag;
+
     buf_ptr = s->buf_ptr;
+
+    if (s->xx_debug)
+    {
+         tag = s->xx_debug(s->put_bit_user_data); 
+	 //printf("xxxxxxxxx debug, tag is %s\n", tag);
+    }
 
     for (i = 0;  i < len;  i++)
     {

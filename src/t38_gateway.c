@@ -2070,6 +2070,17 @@ static void rx_flag_or_abort(hdlc_rx_state_t *t)
 }
 /*- End of function --------------------------------------------------------*/
 
+
+static const char * t38_xx_debug(hdlc_rx_state_t *t)
+{
+    t38_gateway_state_t *s;
+	
+    s = (t38_gateway_state_t *) t->frame_user_data;
+
+    return s->logging.tag;
+
+}
+
 static void t38_hdlc_rx_put_bit(hdlc_rx_state_t *t, int new_bit)
 {
     t38_gateway_state_t *s;
@@ -2189,6 +2200,11 @@ static int restart_rx_modem(t38_gateway_state_t *s)
     /* Default to the transmit data being V.21, unless a faster modem pops up trained. */
     s->t38x.current_tx_data_type = T38_DATA_V21;
     fsk_rx_init(&t->v21_rx, &preset_fsk_specs[FSK_V21CH2], FSK_FRAME_MODE_SYNC, (put_bit_func_t) t38_hdlc_rx_put_bit, &t->hdlc_rx);
+
+    fsk_rx_state_t *fskp;
+    fskp = &t->v21_rx;
+    fskp->xx_debug = (xx_debug_func_t) t38_xx_debug;
+	
 #if 0
     fsk_rx_signal_cutoff(&t->v21_rx, -45.5f);
 #endif

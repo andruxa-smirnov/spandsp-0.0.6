@@ -104,6 +104,10 @@ typedef int (*get_byte_func_t)(void *user_data);
 /*! Bit put function for data pumps */
 typedef void (*put_bit_func_t)(void *user_data, int bit);
 
+/*! xx debug */
+typedef const char * (*xx_debug_func_t)(void *user_data);
+
+
 /*! Bit get function for data pumps */
 typedef int (*get_bit_func_t)(void *user_data);
 

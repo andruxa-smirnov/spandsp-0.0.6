@@ -1,1 +1,6 @@
-# dummy
+media_monitor.o: media_monitor.cpp /usr/include/stdc-predef.h \
+ ../src/config.h
+
+/usr/include/stdc-predef.h:
+
+../src/config.h:

@@ -60,6 +60,10 @@ struct fsk_rx_state_s
     int baud_rate;
     /*! \brief Synchronous/asynchronous framing control */
     int framing_mode;
+
+    // xx_debug
+    xx_debug_func_t xx_debug;
+	
     /*! \brief The callback function used to put each bit received. */
     put_bit_func_t put_bit;
     /*! \brief A user specified opaque pointer passed to the put_bit routine. */
